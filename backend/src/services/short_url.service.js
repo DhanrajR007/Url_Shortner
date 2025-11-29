@@ -1,15 +1,23 @@
-import newurl from "../dao/shorturl.js";
+import dao from "../dao/shorturl.js";
 import getlength from "../utils/helper.js";
 
 const short_url_whithotUser = async (url) => {
-  const shorturl = getlength(7);
-  await newurl(url, shorturl);
-  return shorturl;
+  try {
+    const shorturl = getlength(7);
+    await dao.newurl(url, shorturl);
+    return shorturl;
+  } catch (err) {
+    throw err;
+  }
 };
 const short_url_withUser = async (url, user) => {
-  const shorturl = await getlength(7);
-  await newurl(url, shorturl, user);
-  return shorturl;
+  try {
+    const shorturl = await getlength(7);
+    await dao.newurl(url, shorturl, user);
+    return shorturl;
+  } catch (err) {
+    throw err;
+  }
 };
 
 export default {

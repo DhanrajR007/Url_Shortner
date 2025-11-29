@@ -1,22 +1,31 @@
 import url_schema from "../models/shortUrl.model.js";
 
-const newurl = (url, shorturl, user) => {
-  const newurl = new url_schema({
-    full_url: url,
-    short_url: shorturl,
-  });
-  if (user) {
-    newurl.user_id = user;
+const newurl = async (url, shorturl, user) => {
+  try {
+    const data = new url_schema({
+      full_url: url,
+      short_url: shorturl,
+    });
+    if (user) {
+      data.user_id = user;
+    }
+    await data.save();
+    return data;
+  } catch (err) {
+    throw err;
   }
-  newurl.save();
 };
 
 const getshortUrl = async (id) => {
-  const newid = await url_schema.findOneAndUpdate(
-    { short_url: id },
-    { $inc: { clicks: 1 } }
-  );
-  return newid;
+  try {
+    const newid = await url_schema.findOneAndUpdate(
+      { short_url: id },
+      { $inc: { clicks: 1 } }
+    );
+    return newid;
+  } catch (err) {
+    throw err;
+  }
 };
 
 export default { newurl, getshortUrl };
