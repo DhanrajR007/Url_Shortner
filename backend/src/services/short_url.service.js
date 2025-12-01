@@ -10,11 +10,13 @@ const short_url_whithotUser = async (url) => {
     throw err;
   }
 };
-const short_url_withUser = async (url, user) => {
+const short_url_withUser = async (url, user, slug) => {
   try {
     const shorturl = await getlength(7);
-    await dao.newurl(url, shorturl, user);
-    return shorturl;
+    const short_url = slug ? slug : shorturl;
+
+    await dao.newurl(url, short_url, user);
+    return short_url;
   } catch (err) {
     throw err;
   }

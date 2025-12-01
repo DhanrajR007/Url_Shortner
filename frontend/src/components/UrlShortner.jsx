@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { instance } from "../utils/AxiosUtility.js";
 
 const UrlShortner = () => {
@@ -12,8 +11,10 @@ const UrlShortner = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await instance.post("api/create", {
+      console.log(url);
+      const response = await instance.post("create", {
         url,
+        slug: "fff",
       });
       setShortUrl(response.data);
     } catch (err) {

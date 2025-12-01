@@ -4,18 +4,20 @@ import { BadRequestError, NotFoundError } from "../utils/errorHandler.js";
 
 const createUrl = async (req, res, next) => {
   try {
-    const { url } = req.body;
+    const { url, slug } = req.body;
     if (!req.body || !req.body.url) {
       throw new BadRequestError("URL is required");
     }
-    const user = req.user._id;
+    const user = req.user ? req.user._id : null;
+
     // const userId = user._id.toString();
+    let shorturl;
     if (user) {
-      await short_url.short_url_withUser(url, user);
+      shorturl = await short_url.short_url_withUser(url, user, slug);
     } else {
-      const shorturlll = await short_url.short_url_whithotUser(url);
+      shorturl = await short_url.short_url_whithotUser(url);
     }
-    res.send(process.env.APPURL);
+    res.send(process.env.APPURL + shorturl);
   } catch (err) {
     next(err);
   }

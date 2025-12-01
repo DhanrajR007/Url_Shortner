@@ -2,7 +2,6 @@ import url_schema from "../models/shortUrl.model.js";
 
 const newurl = async (url, shorturl, user) => {
   try {
-    console.log(user);
     const data = new url_schema({
       full_url: url,
       short_url: shorturl,
