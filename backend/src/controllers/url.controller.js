@@ -8,8 +8,14 @@ const createUrl = async (req, res, next) => {
     if (!req.body || !req.body.url) {
       throw new BadRequestError("URL is required");
     }
-    const shorturlll = await short_url.short_url_whithotUser(url);
-    res.send(process.env.APPURL + shorturlll);
+    const user = req.user._id;
+    // const userId = user._id.toString();
+    if (user) {
+      await short_url.short_url_withUser(url, user);
+    } else {
+      const shorturlll = await short_url.short_url_whithotUser(url);
+    }
+    res.send(process.env.APPURL);
   } catch (err) {
     next(err);
   }
