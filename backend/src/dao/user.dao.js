@@ -8,6 +8,11 @@ const find_by_email = async (email) => {
     throw err;
   }
 };
+export const findUserByEmailByPassword = async (email) => {
+    const result =  await userModel.findOne({email}).select('+password')
+
+    return result
+}
 
 export const findUserById = async (id) => {
   return await userModel.findById(id);

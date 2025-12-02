@@ -15,7 +15,10 @@ connectDB();
 
 //Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // your React app
+    credentials: true // 👈 this allows cookies to be sent
+}));
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
