@@ -15,3 +15,7 @@ const user = await instance.post("auth/register",{
 })
 return user.data.user
 } 
+export const getCurrentUser = async ()=>{
+    const user = await instance.get("auth/me")
+    return user.data.user
+}

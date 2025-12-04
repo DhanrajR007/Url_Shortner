@@ -1,3 +1,4 @@
+import { get } from "mongoose";
 import { registerUser, loginUser } from "../services/user.service.js";
 
 
@@ -32,5 +33,11 @@ const registeruser = async (req, res) => {
     message: "user created Succesfully",
   });
 };
+ const getcurrentuser=async (req,res)=>{
+  res.status(200).json({
+    user: req.user,
+    message: "user fetched successfully",
+  });
+}
 
-export default { login_user, registeruser };
+export default { login_user, registeruser ,getcurrentuser };

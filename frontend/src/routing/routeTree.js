@@ -3,6 +3,7 @@ import RootLayout from "../RootLayout"
 import Home from "../pages/Home"
 import Dashboard from "../pages/Dashboard"
 import Auth from "../pages/Auth"
+import { checkAuth } from "../utils/helper"
 
 export const rootRoute = createRootRoute({
     component: RootLayout
@@ -18,6 +19,7 @@ const dasboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/dashboard',
   component: Dashboard,
+  beforeLoad:checkAuth
 })
 const authRoute = createRoute({
   getParentRoute: () => rootRoute,

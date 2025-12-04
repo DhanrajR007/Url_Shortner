@@ -30,4 +30,13 @@ const getshortUrl = async (id) => {
   }
 };
 
-export default { newurl, getshortUrl };
+const getAllUrls = async (userId) => {
+  try {
+    const urls = await url_schema.find({ user: userId });
+    return urls;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export default { newurl, getshortUrl, getAllUrls };
