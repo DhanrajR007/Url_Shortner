@@ -3,14 +3,13 @@ import short_url from "../services/short_url.service.js";
 import { BadRequestError, NotFoundError } from "../utils/errorHandler.js";
 
 const createUrl = async (req, res, next) => {
-  try {
-    const { url, slug } = req.body;
+   const { url, slug } = req.body;
     if (!req.body || !req.body.url) {
       throw new BadRequestError("URL is required");
     }
+  try {
+   
     const user = req.user ? req.user._id : null;
-
-    // const userId = user._id.toString();
     let shorturl;
     if (user) {
       shorturl = await short_url.short_url_withUser(url, user, slug);

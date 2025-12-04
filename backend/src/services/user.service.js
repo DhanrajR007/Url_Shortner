@@ -23,17 +23,18 @@ export const registerUser = async (req) => {
   }
 };
 export const loginUser = async (req) => {
+  const { email, password } = req;
+  if (!email || !password) {
+    throw new ConflictError("email & password is required");
+  }
+
+  const user = await findUserByEmailByPassword(email);
+  if (!user) {
+    throw new BadRequestError("Invalid Credientials");
+  }
   try {
-    const { email, password } = req;
-    if (!email || !password) {
-      throw new ConflictError("email & password is required");
-    }
-    const user = await  findUserByEmailByPassword(email);
-    if (!user) {
-      throw new BadRequestError("Invalid Credientials");
-    }
-      const isPasswordValid = await user.comparePassword(String(password))
-    if(!isPasswordValid) throw new Error("Invalid email or password")
+    const isPasswordValid = await user.comparePassword(String(password));
+    if (!isPasswordValid) throw new Error("Invalid email or password");
     const userId = user._id.toString();
     const token = await tokenConfig.signinToken(userId);
     return { user, token };
@@ -41,4 +42,3 @@ export const loginUser = async (req) => {
     throw err;
   }
 };
-

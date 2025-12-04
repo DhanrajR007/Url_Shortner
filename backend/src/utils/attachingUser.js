@@ -1,12 +1,14 @@
+import tokenConfig from "../config/token.config.js";
+import { findUserById } from "../dao/user.dao.js";
+
 export const attachUser = async (req, res, next) => {
   const token = req.cookies.accesstoken;
-
+  
   if (!token) return next();
 
   try {
-    const decoded = Token.varifyToken(token);
-    const user = await findUserById(decoded.id);
-
+    const decoded = tokenConfig.varifyToken(token);
+    const user = await findUserById(decoded);
     if (!user) return next();
 
     req.user = user;

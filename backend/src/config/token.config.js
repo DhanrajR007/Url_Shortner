@@ -12,7 +12,7 @@ const signinToken = (userId) => {
 const varifyToken = (payload) => {
   try {
     const t = JWT.verify(payload, process.env.JWT_SECRET);
-    return t;
+    return t.id;
   } catch (err) {
     throw err;
   }

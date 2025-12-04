@@ -9,6 +9,8 @@ const login_user = async (req, res) => {
     httpOnly: true,
     secure: false, // true in production (https)
     sameSite: "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+
   });
 
   res.status(200).json({
@@ -23,6 +25,7 @@ const registeruser = async (req, res) => {
     httpOnly: true,
     secure: false, // true in production (https)
     sameSite: "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
   res.status(200).json({
     user:user,
