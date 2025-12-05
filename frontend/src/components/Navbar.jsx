@@ -17,11 +17,6 @@ const Navbar = () => {
           <Link to="/dashboard" className="hover:text-gray-300">
             Dashboard
           </Link>
-          {!isAuthenticated && (
-            <Link to="/auth" className="hover:text-gray-300">
-              sign In
-            </Link>
-          )}
         </div>
       </div>
     </nav>

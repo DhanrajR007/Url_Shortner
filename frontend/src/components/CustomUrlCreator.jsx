@@ -21,6 +21,8 @@ const CustomUrlCreator = () => {
         slug: slug.trim() || undefined, // Send undefined if empty so backend handles it
       });
       setShortUrl(response.data);
+      setUrl("");
+      setSlug("");
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "Failed to create custom URL");

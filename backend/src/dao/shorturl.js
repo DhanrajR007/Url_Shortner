@@ -1,6 +1,11 @@
 import url_schema from "../models/shortUrl.model.js";
 
 const newurl = async (url, shorturl, user) => {
+  const ifshorturl = await url_schema.findOne({ short_url: shorturl });
+  if (ifshorturl) {
+    throw new Error("Short URL already exists");
+  }
+
   try {
     const data = new url_schema({
       full_url: url,
